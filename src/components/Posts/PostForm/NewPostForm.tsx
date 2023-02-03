@@ -1,23 +1,8 @@
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  CloseButton,
-  Flex,
-  Icon,
-  Text,
-} from "@chakra-ui/react";
-import React, { useState } from "react";
-import { BsLink45Deg, BsMic } from "react-icons/bs";
-import { IoDocumentText, IoImageOutline } from "react-icons/io5";
-import { BiPoll } from "react-icons/bi";
-import TabItem from "./TabItem";
-import TextInputs from "./TextInputs";
-import ImageUpload from "./ImageUpload";
 import { Post } from "@/atoms/postsAtom";
+import { firestore, storage } from "@/firebase/clientApp";
+import useSelectFile from "@/hooks/useSelectFile";
+import { Alert, AlertIcon, Flex, Icon, Text } from "@chakra-ui/react";
 import { User } from "firebase/auth";
-import { useRouter } from "next/router";
 import {
   addDoc,
   collection,
@@ -25,9 +10,15 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
-import { firestore, storage } from "@/firebase/clientApp";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import useSelectFile from "@/hooks/useSelectFile";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { BiPoll } from "react-icons/bi";
+import { BsLink45Deg, BsMic } from "react-icons/bs";
+import { IoDocumentText, IoImageOutline } from "react-icons/io5";
+import ImageUpload from "./ImageUpload";
+import TabItem from "./TabItem";
+import TextInputs from "./TextInputs";
 
 type NewPostFormProps = {
   user: User;
@@ -97,7 +88,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
         });
       }
       router.back();
-    } catch (e: any) {
+    } catch (e) {
       console.log("handleCreatePost error", e.message);
       setError(true);
     }

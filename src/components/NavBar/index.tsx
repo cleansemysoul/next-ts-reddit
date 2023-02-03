@@ -1,10 +1,10 @@
-import React from "react";
-import { Flex, Image } from "@chakra-ui/react";
-import SearchInput from "./SearchInput";
-import RightContent from "./RightContent";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/clientApp";
+import { Flex, Image } from "@chakra-ui/react";
+import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Directory from "./Directory";
+import RightContent from "./RightContent";
+import SearchInput from "./SearchInput";
 const NavBar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   return (

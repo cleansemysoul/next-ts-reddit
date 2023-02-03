@@ -1,16 +1,17 @@
 import { Community, communityState } from "@/atoms/communitiesAtom";
 import { auth, firestore, storage } from "@/firebase/clientApp";
 import useSelectFile from "@/hooks/useSelectFile";
+import { secondsToFullDate } from "@/utils/formatTime";
 import {
   Box,
-  Flex,
-  Text,
-  Icon,
-  Stack,
-  Divider,
   Button,
+  Divider,
+  Flex,
+  Icon,
   Image,
   Spinner,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 import { doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
@@ -50,7 +51,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
           imageURL: downloadURL,
         } as Community,
       }));
-    } catch (e: any) {
+    } catch (e) {
       console.log("onUpdateImage error", e);
     }
     setUploadingImage(false);
@@ -94,12 +95,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             <Icon as={RiCakeLine} />
             {communityData.createdAt && (
               <Text>
-                Created{" "}
-                {new Intl.DateTimeFormat("fr-FR", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }).format(new Date(communityData.createdAt.seconds * 1000))}
+                Created {secondsToFullDate(communityData.createdAt.seconds)}
               </Text>
             )}
           </Flex>

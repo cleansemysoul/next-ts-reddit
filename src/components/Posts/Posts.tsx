@@ -39,7 +39,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
         ...prev,
         posts: posts as Post[],
       }));
-    } catch (e: any) {
+    } catch (e) {
       console.log("getPosts error", e);
     }
     setLoading(false);
@@ -48,6 +48,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
   useEffect(() => {
     getPosts();
   }, []);
+
   return (
     <>
       {loading ? (
@@ -58,7 +59,10 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
             <PostItem
               post={item}
               userIsCreator={user?.uid === item.creatorId}
-              userVoteValue={undefined}
+              userVoteValue={
+                postStateValue.postVotes.find((vote) => vote.postId === item.id)
+                  ?.voteValue
+              }
               onVote={onVote}
               onSelectPost={onSelectPost}
               onDeletePost={onDeletePost}

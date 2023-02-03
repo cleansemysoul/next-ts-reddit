@@ -1,7 +1,7 @@
 import CreateCommunityModal from "@/components/Modal/CreateCommunity/CreateCommunityModal";
-import { GrAdd } from "react-icons/gr";
-import { Flex, MenuItem, Icon } from "@chakra-ui/react";
+import { Flex, Icon, MenuItem } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { GrAdd } from "react-icons/gr";
 
 type ComunitiesProps = {};
 
